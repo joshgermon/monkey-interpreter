@@ -1,20 +1,7 @@
-#include "token.h"
+#include "Lexer.hpp"
 #include <string>
 
-class Lexer {
-public:
-  std::string input;
-  Lexer(std::string);
-  void readChar();
-  Token nextToken();
-
-private:
-  int position;
-  int readPosition;
-  char ch;
-};
-
-Lexer::Lexer(std::string lexer_input) { input = lexer_input; }
+Lexer::Lexer(std::string lexerInput) { input = lexerInput; }
 
 void Lexer::readChar() {
   if (readPosition >= input.length()) {

@@ -1,5 +1,5 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "../vendor/doctest.h"
+#include "../lib/doctest.h"
 
 // Function to add two numbers
 int add(int a, int b) {

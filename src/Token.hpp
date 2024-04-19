@@ -22,11 +22,11 @@ enum class TokenType {
 
 class Token {
 public:
+    TokenType type;
     Token(TokenType type, char ch) : type(type), literal(1, ch) {}
     Token() : type(TokenType::ENDOF), literal("") {}
 
 private:
-  TokenType type;
   std::string literal;
 };
 
