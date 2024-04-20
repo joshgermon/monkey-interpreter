@@ -6,9 +6,7 @@ bool isLetter(char ch) {
   return 'a' <= ch && ch <= 'z' || 'A' <= ch && ch <= 'Z' || ch == '_';
 }
 
-bool isDigit(char ch) {
-  return '0' <= ch && ch <= '9';
-}
+bool isDigit(char ch) { return '0' <= ch && ch <= '9'; }
 
 void Lexer::readChar() {
   if (readPosition >= input.length()) {
@@ -26,9 +24,6 @@ Token Lexer::nextToken() {
   skipWhitespace();
 
   switch (ch) {
-  case '=':
-    token = Token(TokenType::ASSIGN, ch);
-    break;
   case ';':
     token = Token(TokenType::SEMICOLON, ch);
     break;
@@ -41,14 +36,49 @@ Token Lexer::nextToken() {
   case ',':
     token = Token(TokenType::COMMA, ch);
     break;
-  case '+':
-    token = Token(TokenType::PLUS, ch);
-    break;
   case '{':
     token = Token(TokenType::LBRACE, ch);
     break;
   case '}':
     token = Token(TokenType::RBRACE, ch);
+    break;
+  case '=':
+    if(peekChar() == '=') {
+      char initCh = ch;
+      readChar();
+      token = Token(TokenType::EQ, std::string { initCh, ch });
+    }else {
+      token = Token(TokenType::ASSIGN, ch);
+    }
+    break;
+  case '+':
+    token = Token(TokenType::PLUS, ch);
+    break;
+  case '-':
+    token = Token(TokenType::MINUS, ch);
+    break;
+  case '!':
+    if(peekChar() == '=') {
+      char initCh = ch;
+      readChar();
+      token = Token(TokenType::NOT_EQ, std::string { initCh, ch });
+    }else {
+      token = Token(TokenType::BANG, ch);
+    }
+    break;
+    token = Token(TokenType::BANG, ch);
+    break;
+  case '/':
+    token = Token(TokenType::SLASH, ch);
+    break;
+  case '*':
+    token = Token(TokenType::ASTERISK, ch);
+    break;
+  case '<':
+    token = Token(TokenType::LT, ch);
+    break;
+  case '>':
+    token = Token(TokenType::GT, ch);
     break;
   case 0:
     token = Token(); // EOF token
@@ -100,9 +130,14 @@ std::string Lexer::readNumber() {
 
 void Lexer::skipWhitespace() {
   // Continue progressing while the current char is whitespace
-  while(ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
+  while (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r') {
     readChar();
   }
 }
 
-
+char Lexer::peekChar() {
+  if (readPosition >= input.length()) {
+    return 0;
+  }
+  return input[readPosition];
+}

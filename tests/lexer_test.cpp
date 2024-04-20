@@ -5,13 +5,25 @@
 #include <vector>
 
 TEST_CASE("NextToken Test") {
-std::string input = R"(
-    let five = 5;
-    let ten = 10;
-    let add = fn(x, y) {
-        x + y;
-    };
-    let result = add(five, ten);
+  std::string input = R"(let five = 5;
+  let ten = 10;
+
+  let add = fn(x, y) {
+    x + y;
+  };
+
+  let result = add(five, ten);
+  !-/*5;
+  5 < 10 > 5;
+
+  if (5 < 10) {
+    return true;
+  } else {
+    return false;
+  }
+
+  10 == 10;
+  10 != 9;
 )";
 
   std::vector<std::pair<TokenType, std::string>> tests = {
@@ -33,7 +45,25 @@ std::string input = R"(
       {TokenType::LPAREN, "("},    {TokenType::IDENT, "five"},
       {TokenType::COMMA, ","},     {TokenType::IDENT, "ten"},
       {TokenType::RPAREN, ")"},    {TokenType::SEMICOLON, ";"},
-      {TokenType::ENDOF, ""},
+      {TokenType::BANG, "!"},      {TokenType::MINUS, "-"},
+      {TokenType::SLASH, "/"},     {TokenType::ASTERISK, "*"},
+      {TokenType::INT, "5"},       {TokenType::SEMICOLON, ";"},
+      {TokenType::INT, "5"},       {TokenType::LT, "<"},
+      {TokenType::INT, "10"},      {TokenType::GT, ">"},
+      {TokenType::INT, "5"},       {TokenType::SEMICOLON, ";"},
+      {TokenType::IF, "if"},       {TokenType::LPAREN, "("},
+      {TokenType::INT, "5"},       {TokenType::LT, "<"},
+      {TokenType::INT, "10"},      {TokenType::RPAREN, ")"},
+      {TokenType::LBRACE, "{"},    {TokenType::RETURN, "return"},
+      {TokenType::TRUE, "true"},   {TokenType::SEMICOLON, ";"},
+      {TokenType::RBRACE, "}"},    {TokenType::ELSE, "else"},
+      {TokenType::LBRACE, "{"},    {TokenType::RETURN, "return"},
+      {TokenType::FALSE, "false"}, {TokenType::SEMICOLON, ";"},
+      {TokenType::RBRACE, "}"},    {TokenType::INT, "10"},
+      {TokenType::EQ, "=="},       {TokenType::INT, "10"},
+      {TokenType::SEMICOLON, ";"}, {TokenType::INT, "10"},
+      {TokenType::NOT_EQ, "!="},   {TokenType::INT, "9"},
+      {TokenType::SEMICOLON, ";"}, {TokenType::ENDOF, ""},
   };
 
   Lexer l(input);

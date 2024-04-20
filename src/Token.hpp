@@ -7,8 +7,6 @@ enum class TokenType {
   ENDOF,
   IDENT,
   INT,
-  ASSIGN,
-  PLUS,
   COMMA,
   SEMICOLON,
   LPAREN,
@@ -16,7 +14,22 @@ enum class TokenType {
   LBRACE,
   RBRACE,
   FUNCTION,
-  LET
+  LET,
+  ASSIGN,
+  PLUS,
+  MINUS,
+  BANG,
+  ASTERISK,
+  SLASH,
+  LT,
+  GT,
+  TRUE,
+  FALSE,
+  IF,
+  ELSE,
+  RETURN,
+  EQ,
+  NOT_EQ
 };
 
 class Token {
@@ -24,6 +37,7 @@ public:
     std::string literal;
     TokenType type;
     Token(TokenType type, char ch) : type(type), literal(1, ch) {}
+    Token(TokenType type, std::string str) : type(type), literal(str) {}
     Token() : type(TokenType::ENDOF), literal("") {}
 };
 
