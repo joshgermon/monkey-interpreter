@@ -1,5 +1,5 @@
-#include "Lexer.hpp"
-#include "Token.hpp"
+#include "lexer.h"
+#include "token.h"
 #include <string>
 
 bool isLetter(char ch) {

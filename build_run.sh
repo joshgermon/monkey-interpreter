@@ -1,2 +1,2 @@
 #!/bin/bash
-cd build && make && ./bin/MonkeyInterpreter
+cd build && cmake .. && make && ./bin/MonkeyInterpreter

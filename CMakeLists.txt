@@ -16,6 +16,7 @@ set(APP_SOURCES
   src/main.cpp
   src/lexer.cpp
   src/token.cpp
+  src/repl.cpp
 )
 
 # Create a library from the source files

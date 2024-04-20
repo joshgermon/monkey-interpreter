@@ -8,7 +8,7 @@ The project includes all that is needed to build with CMake, including the docte
 ```
 ├── src (all source files incl. header files)
 │   ├── *.cpp
-│   ├── *.hpp
+│   ├── *.h
 ├── lib (external header files)
 │   ├── *.h
 │   ├── *.hpp

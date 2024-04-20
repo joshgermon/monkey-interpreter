@@ -1,7 +1,7 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "../lib/doctest.h"
-#include "../src/Lexer.hpp" // Assuming you have a lexer implementation in lexer.h/cpp
-#include "../src/Token.hpp" // Assuming you have a TokenType::implementation in token.h/cpp
+#include "../src/lexer.h" // Assuming you have a lexer implementation in lexer.h/cpp
+#include "../src/token.h" // Assuming you have a TokenType::implementation in token.h/cpp
 #include <vector>
 
 TEST_CASE("NextToken Test") {
