@@ -1,28 +1,20 @@
-#include <string>
+#include "Token.hpp"
+#include <unordered_map>
 
-enum class TokenType {
-  ILLEGAL,
-  ENDOF,
-  IDENT,
-  INT,
-  ASSIGN,
-  PLUS,
-  COMMA,
-  SEMICOLON,
-  LPAREN,
-  RPAREN,
-  LBRACE,
-  RBRACE,
-  FUNCTION,
-  LET
-};
 
-class Token {
-public:
-    Token(TokenType type, char ch) : type(type), literal(1, ch) {}
-    Token() : type(TokenType::ENDOF), literal("") {}
+TokenType lookupIdent(std::string ident) {
+  static const std::unordered_map<std::string, TokenType> keywords = {
+    {"let", TokenType::LET },
+    {"fn", TokenType::FUNCTION },
+  };
 
-private:
-  TokenType type;
-  std::string literal;
-};
+  // Find keyword, if it exists, return enum value
+  auto keywordItr = keywords.find(ident);
+  if (keywordItr != keywords.end()) {
+    return keywordItr->second; // AKA the value
+  }
+
+  // Otherwise return identifier
+  return TokenType::IDENT;
+}
+

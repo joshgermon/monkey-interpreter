@@ -1,5 +1,4 @@
-#ifndef TOKEN_H
-#define TOKEN_H
+#pragma once
 
 #include <string>
 
@@ -22,13 +21,10 @@ enum class TokenType {
 
 class Token {
 public:
+    std::string literal;
     TokenType type;
     Token(TokenType type, char ch) : type(type), literal(1, ch) {}
     Token() : type(TokenType::ENDOF), literal("") {}
-
-private:
-  std::string literal;
 };
 
-#endif // TOKEN_H
-
+TokenType lookupIdent(std::string ident);

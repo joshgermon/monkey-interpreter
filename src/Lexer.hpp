@@ -7,15 +7,20 @@
 class Lexer {
 public:
   std::string input;
-  Lexer(std::string);
-  void readChar();
+  char ch;
+  Lexer(std::string lexerInput): input(lexerInput), position(0), readPosition(0) { readChar(); };
   Token nextToken();
 
 private:
   int position;
   int readPosition;
-  char ch;
+  void readChar();
+  void skipWhitespace();
+  std::string readIdentifier();
+  std::string readNumber();
 };
 
+
+bool isLetter(char ch);
 
 #endif // !LEXER_HPP

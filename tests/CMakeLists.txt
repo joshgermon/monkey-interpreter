@@ -2,7 +2,6 @@
 
 # Add the test executable and specify all test source files
 add_executable(monkey_tests
-    main_test.cpp
     lexer_test.cpp
 )
 
