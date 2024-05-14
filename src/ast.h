@@ -23,11 +23,12 @@ class Expression: public Node {
 class Program: public Node {
   public:
     std::string tokenLiteral() override;
-    std::vector<Statement> statements;
+    std::vector<std::unique_ptr<Statement>> statements;
 };
 
 class Identifier: public Expression {
   public:
+    Identifier(Token token, std::string value): token(token), value(value) {};
     std::string tokenLiteral() override;
     std::unique_ptr<Node> expressionNode() override;
     Token token;
@@ -36,6 +37,7 @@ class Identifier: public Expression {
 
 class LetStatement: public Statement {
   public:
+    LetStatement(Token token): token(token) {};
     std::string tokenLiteral() override;
     std::unique_ptr<Node> statementNode() override;
     Token token;
